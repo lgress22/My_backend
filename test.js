@@ -10,18 +10,30 @@ const songs = ["New York, New York", "That's Life", "Fly Me to the Moon", "My Wa
 "Santa Claus Is Coming To Town", "Everybody Loves Somebody", "Let Me Try Again", "It Had To Be You", "Silent Night, Holy Night",
  "Mistletoe and Holly", "You Make Me Feel so Young"]
 
+ const wives = ("Nancy Barbato, Ava Gardner, Mia Farrow, Barbara Marx")
 
 app.get("/", (req, res) => {
     console.log("Here route ROOT")
     const RandomSongs = songs[Math.floor(Math.random() * songs.length)]
 
-    res.send({songs:RandomSongs})
+    res.send(RandomSongs)
 })
 
-app.get("/gtn", (req, res) => {
-    res.send("Hello Gaetan")
+app.get("/birthdate", (req, res) => {
+    res.send("December 12, 1915")
 })
 
+app.get("/birthcity", (req, res) => {
+    res.send("Hoboken, New Jersey")
+})
+
+app.get("/wives", (req, res) => {
+    res.send(wives)
+})
+
+app.get("/picture", (req, res) => {
+    res.send ("https://en.wikipedia.org/wiki/Frank_Sinatra#/media/File:Frank_Sinatra2,_Pal_Joey.jpg")
+})
 
 app.listen(port, (error) =>{
     if(!error)
