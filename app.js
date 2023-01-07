@@ -11,7 +11,7 @@ const songs = ["New York, New York", "That's Life", "Fly Me to the Moon", "My Wa
  const wives = ("Nancy Barbato, Ava Gardner, Mia Farrow, Barbara Marx")
 
 app.get("/", (req, res) => {
-    console.log("Here route ROOT")
+    console.log("This is working")
     const RandomSongs = songs[Math.floor(Math.random() * songs.length)]
 
     res.send(RandomSongs)
@@ -31,12 +31,13 @@ app.get("/wives", (req, res) => {
 
 
 app.get("/picture", (req,res) => {
-    res.redirect("https://en.wikipedia.org/wiki/Frank_Sinatra#/media/File:Frank_Sinatra2-_Pal_Joey.jpg")
+    res.redirect("https://en.wikipedia.org/wiki/Frank_Sinatra#/media/File:Frank_Sinatra2-_Pal_Joey.jpg");
 })
 
 
-app.get("/public", (req,res) => {
-    res.send("Everybody can see this page")
+app.get("/public", (req, res) => {
+    console.log("hEllo bUd")
+    res.send("Everybody can see this page");
 })
 
 
@@ -44,10 +45,10 @@ app.get("/public", (req,res) => {
 //     users: {"admin": "admin"}
 // }))
 
-// app.get("/protected", (req, res) => {
-//     console.log("/user request called")
-//     res.send("Welcome, authenticated client")
-// })
+app.get("/protected", (req, res, next) => {
+    res.send("https://admin:admin@web-t297d0143-1e82.docode.us.qwasar.io")
+    next("Welcome, authorized client")
+})
 
 
 app.listen(port, (error) =>{
