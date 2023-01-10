@@ -44,7 +44,7 @@ app.get("/public", (req, res) => {
 
 
 app.get("/protected", (req, res) => {
-    array = (atob(req.headers.authorization.split(" ")[1]).split(":"))
+      array = (atob(req.headers.authorization.split(" ")[1]).split(":"))
 
 
     username = array[0]
@@ -53,18 +53,15 @@ app.get("/protected", (req, res) => {
     if(username == "admin" && password == "admin"){
         res.send("Welcome, authenticated client");
     }
-
+    
     res.set("WWW-Authenticate", "Basic realm = '401'");
     res.status(401).send("Not Authorized");
 })
 
 
 app.listen(port, (error) =>{
-    if(!error)
+   
     console.log("Server is Succesfully Running, and app is listening on port" + port)
-    else
-    console.log("Error occured, server can't start", error);
-
 })
 
 
