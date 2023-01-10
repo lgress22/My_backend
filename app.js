@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const port = 8080;
-const basicAuth = require("express-basic-auth")
 
 const songs = ["New York, New York", "That's Life", "Fly Me to the Moon", "My Way", "Jingle Bells" , "Come Fly with Me", "Somehthin' Stupid", 
 "Summer Wind", "I've got You Under My Skin", "Luck Be A Lady", "I'm a Fool to Want You", "Let It Snow! Let It Snow! Let It Snow!", 
@@ -41,13 +40,22 @@ app.get("/public", (req, res) => {
 })
 
 
-// app.use(basicAuth({
-//     users: {"admin": "admin"}
-// }))
 
-app.get("/protected", (req, res, next) => {
-    res.send("https://admin:admin@web-t297d0143-1e82.docode.us.qwasar.io")
-    next("Welcome, authorized client")
+
+
+app.get("/protected", (req, res) => {
+    array = (atob(req.headers.authorization.split(" ")[1]).split(":"))
+
+
+    username = array[0]
+    password = array[1]
+
+    if(username == "admin" && password == "admin"){
+        res.send("Welcome, authenticated client");
+    }
+
+    res.set("WWW-Authenticate", "Basic realm = '401'");
+    res.status(401).send("Not Authorized");
 })
 
 
