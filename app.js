@@ -1,6 +1,16 @@
 const express = require("express");
 const app = express();
 const port = 8080;
+const basicAuth = require('express-basic-auth')
+
+
+var Auth = basicAuth({
+    users: {'admin' : 'admin'},
+    challenge: true,
+    unauthorizedResponse: "Not authorized"
+    
+})
+
 
 const songs = ["New York, New York", "That's Life", "Fly Me to the Moon", "My Way", "Jingle Bells" , "Come Fly with Me", "Somehthin' Stupid", 
 "Summer Wind", "I've got You Under My Skin", "Luck Be A Lady", "I'm a Fool to Want You", "Let It Snow! Let It Snow! Let It Snow!", 
@@ -43,25 +53,31 @@ app.get("/public", (req, res) => {
 
 
 
-app.get("/protected", (req, res) => {
-      array = (atob(req.headers.authorization.split(" ")[1]).split(":"))
+app.get("/protected", Auth, (req, res) => {
 
-
-    username = array[0]
-    password = array[1]
-
-    if(username == "admin" && password == "admin"){
-        res.send("Welcome, authenticated client");
-    }
+    res.send("Welcome, authenticated client")
     
-    res.set("WWW-Authenticate", "Basic realm = '401'");
-    res.status(401).send("Not Authorized");
-})
+//     array = (atob(req.headers.authorization.split(" ")[1]).split(":"))
+//     console.log(req.headers)
+    
+//     username = array[0]
+//     password = array[1]
+    
+
+//     if(username == "admin" && password == "admin"){
+//         res.send("Welcome, authenticated client");
+//     }
+//     else{
+//         res.setHeader('WWW-Authenticate', 'Basic');
+//         res.status(401).send("Not authorized")
+//     }
+ });
 
 
 app.listen(port, (error) =>{
    
     console.log("Server is Succesfully Running, and app is listening on port" + port)
+   
 })
 
 
