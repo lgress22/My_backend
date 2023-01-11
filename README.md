@@ -2,16 +2,16 @@
 ***
 
 ## Task
-TODO - What is the problem? And where is the challenge?
+The problem is creating a small backend website that outputs information on Frnak Sunatara using routes. It also needs to have an authentiocated portion.
 
 ## Description
-TODO - How have you solved the problem?
+Using express with express-basic-auth I was able to make an authenticated website.
 
 ## Installation
-TODO - How to install your project? npm install? make? make re?
+This is for training purposes
 
 ## Usage
-TODO - How does it work?
+This is for training purposes
 ```
 ./my_project argument1 argument2
 ```
